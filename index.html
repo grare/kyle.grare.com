@@ -49,8 +49,8 @@
     </div>
 
     <div class="hero-stats reveal d4">
-      <div class="stat"><div class="num">15<span class="accent">+</span></div><div class="lab">Years in software</div></div>
-      <div class="stat"><div class="num">9<span class="accent">+</span></div><div class="lab">Years leading dev</div></div>
+      <div class="stat"><div class="num"><span data-since-year="2010" data-since-month="6">16</span><span class="accent">+</span></div><div class="lab">Years in software</div></div>
+      <div class="stat"><div class="num"><span data-since-year="2016" data-since-month="9">9</span><span class="accent">+</span></div><div class="lab">Years leading dev</div></div>
       <div class="stat"><div class="num">3</div><div class="lab">Industries</div></div>
       <div class="stat"><div class="num">2<span class="accent">×</span></div><div class="lab">CS + Math degrees</div></div>
     </div>
@@ -80,7 +80,7 @@
           <div class="row"><span class="k">Currently</span><span class="v">VP of Development, Goliath Technologies</span></div>
           <div class="row"><span class="k">Focus</span><span class="v">Eng leadership · Platform · Observability</span></div>
           <div class="row"><span class="k">Based</span><span class="v">Bridgewater, NJ</span></div>
-          <div class="row"><span class="k">Languages</span><span class="v">C++ · Python · JavaScript · SQL</span></div>
+          <div class="row"><span class="k">Languages</span><span class="v">C/C++ · Python · JavaScript · SQL</span></div>
         </div>
       </div>
 
@@ -348,6 +348,15 @@
 </footer>
 
 <script>
+  // keep the experience-year stats current (auto-increments over time)
+  document.querySelectorAll('[data-since-year]').forEach((el) => {
+    const y = +el.dataset.sinceYear, m = +el.dataset.sinceMonth || 1;
+    const now = new Date();
+    let years = now.getFullYear() - y;
+    if (now.getMonth() + 1 < m) years -= 1;
+    el.textContent = years;
+  });
+
   // nav background on scroll
   const nav = document.getElementById('nav');
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
